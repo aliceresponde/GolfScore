@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GolfScore</string>
+    <string name="action_clear_value">Clear scores</string>
 </resources>

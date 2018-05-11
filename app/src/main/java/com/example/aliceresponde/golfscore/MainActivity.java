@@ -4,6 +4,8 @@ import android.app.ListActivity;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 public class MainActivity extends ListActivity {
 
@@ -47,5 +49,27 @@ public class MainActivity extends ListActivity {
             editor.putInt(SCORE_KEY + i, mHoles[i].getScoreValue());
         }
         editor.apply();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_clearValue){
+            editor.clear();
+            editor.apply();
+
+            for (Hole mHole : mHoles){
+                mHole.setScoreValue(0);
+            }
+
+            mHoleAdapter.notifyDataSetChanged();
+        }
+        return super.onMenuItemSelected(featureId, item);
     }
 }
